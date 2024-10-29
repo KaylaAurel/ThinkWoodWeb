@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Mitra - PT. Keong Nusantara Abadi</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body class="is-preload">
+    <div id="wrapper">
+        <div id="main">
+            <div class="inner">
+                <!-- Header -->
+                <header id="header">
+                    <a href="index.html" class="logo"><strong>PT. Keong Nusantara Abadi</strong></a>
+                    <ul class="icons">
+                        <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                        <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                        <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                    </ul>
+                </header>
+
+                <!-- Main Content -->
+                <section>
+                    <header class="main">
+                        <h1>Profil Mitra Sengon</h1>
+                    </header>
+
+                    <div class="table-wrapper">
+                        <table cellpadding="10" cellspacing="0" style="border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th style="border: 1px solid black;">Nama Mitra</th>
+                                    <th style="border: 1px solid black;">Alamat Lahan</th>
+                                    <th style="border: 1px solid black;">Ukuran Lahan</th>
+                                    <th style="border: 1px solid black;">Jumlah Bibit</th>
+                                    <th style="border: 1px solid black;">Tinggi Bibit (m)</th>
+                                    <th style="border: 1px solid black;">Kesehatan Tanaman</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if ($result->num_rows > 0) {
+                                    while($row = $result->fetch_assoc()) {
+                                        echo "<tr>";
+                                        echo "<td>" . htmlspecialchars($row["nama"]) . "</td>";
+                                        echo "<td>" . htmlspecialchars($row["alamat_lahan"]) . "</td>";
+                                        echo "<td>" . htmlspecialchars($row["ukuran_lahan"]) . " ha</td>";
+                                        echo "<td>" . htmlspecialchars($row["jumlah_bibit"]) . "</td>";
+                                        echo "<td>" . htmlspecialchars($row["tinggi_bibit"]) . " m</td>";
+                                        echo "<td>" . htmlspecialchars($row["kesehatan_tanaman"]) . "</td>";
+                                        echo "</tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='6'>Tidak ada data mitra</td></tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div id="sidebar">
+            <div class="inner">
+                <!-- Section -->
+                <section>
+                    <header class="major">
+                        <h2>Kontak Kami</h2>
+                    </header>
+                    <p>Hubungi kami untuk informasi lebih lanjut. Ada pertanyaan? Kami siap membantu.</p>
+                    <ul class="contact">
+                        <li class="icon solid fa-envelope"><a href="#">www.wongcoco.id</a></li>
+                        <li class="icon solid fa-phone">(0354) 526251</li>
+                        <li class="icon solid fa-home">Jl. Raya Bogo - Kunjang, Kediri, Jawa Timur 64156</li>
+                    </ul>
+                </section>
+
+                <!-- Footer -->
+                <footer id="footer">
+                    <p class="copyright">&copy; 2024 WoodConnect. All rights reserved.</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+</html>
