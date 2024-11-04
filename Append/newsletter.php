@@ -1,39 +1,46 @@
 <?php
-  /**
-  * Requires the "PHP Email Form" library
-  * The "PHP Email Form" library is available only in the pro version of the template
-  * The library should be uploaded to: vendor/php-email-form/php-email-form.php
-  * For more info and help: https://bootstrapmade.com/php-email-form/
-  */
+// Ganti dengan alamat email penerima yang sebenarnya
+$receiving_email_address = 'andreansaputra240@gmail.com';
 
-  // Replace contact@example.com with your real receiving email address
-  $receiving_email_address = 'contact@example.com';
+// Memeriksa jalur ke file PHP Email Form
+if (file_exists($php_email_form = __DIR__ . '/assets/vendor/php-email-form/php-email-form.php')) {
+    include($php_email_form);
+} else {
+    die('Unable to load the "PHP Email Form" Library!');
+}
 
-  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-    include( $php_email_form );
-  } else {
-    die( 'Unable to load the "PHP Email Form" Library!');
-  }
+$contact = new PHP_Email_Form;
+$contact->ajax = true;
 
-  $contact = new PHP_Email_Form;
-  $contact->ajax = true;
-  
-  $contact->to = $receiving_email_address;
-  $contact->from_name = $_POST['email'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject ="New Subscription: " . $_POST['email'];
+// Memeriksa apakah input email ada sebelum mengaksesnya
+if (isset($_POST['email'])) {
+    $contact->to = $receiving_email_address;
+    $contact->from_name = $_POST['email'];
+    $contact->from_email = $_POST['email'];
+    $contact->subject = "New Subscription: " . $_POST['email'];
 
-  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
-  /*
-  $contact->smtp = array(
-    'host' => 'example.com',
-    'username' => 'example',
-    'password' => 'pass',
-    'port' => '587'
-  );
-  */
+    // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
+    /*
+    $contact->smtp = array(
+        'host' => 'smtp.gmail.com',
+        'username' => 'andreansaputra240@gmail.com',
+        'password' => 'ponsel1234', // Ganti dengan kata sandi aplikasi jika perlu
+        'port' => '587',
+        'secure' => false
+    );
+    */
 
-  $contact->add_message( $_POST['email'], 'Email');
+    // Menambahkan pesan
+    $contact->add_message($_POST['email'], 'Email');
 
-  echo $contact->send();
+    // Mengirim email dan memeriksa hasil
+    if ($contact->send()) {
+        echo 'Email sent successfully.';
+    } else {
+        // Jika gagal, mencetak error untuk debugging
+        echo 'Error: ' . $contact->error;
+    }
+} else {
+    echo 'Email is required.';
+}
 ?>
